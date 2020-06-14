@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Formula1.Models.Team>
+
+@{
+    ViewData["Title"] = "Formula1 Team Manager";
+}
+
+@inject SignInManager<IdentityUser> signInManager;
+
+<div class="table-title">
+    <div class="row">
+        <div class="col-6">
+            <h2>Manage <b>Teams</b></h2>
+        </div>
+        @if (signInManager.IsSignedIn(User))
+        {
+            <div class="col-6">
+                <a asp-action="Create" class="btn btn-success"><i class="material-icons">add_box</i> Add New Team</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.FoundedIn)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ChampionshipsWon)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.CheckPaid)
+            </th>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <th class="text-center" colspan="2">
+                    Actions
+                </th>
+            }
+            </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.FoundedIn)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ChampionshipsWon)
+                </td>
+                <td class="custom-checkbox text-center">
+                    @Html.DisplayFor(modelItem => item.CheckPaid)
+                </td>
+                @if (signInManager.IsSignedIn(User))
+                {
+                <td class="text-center" colspan="3">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">edit</i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure want to delete this record?')">delete</i>
+                    </a>
+                </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

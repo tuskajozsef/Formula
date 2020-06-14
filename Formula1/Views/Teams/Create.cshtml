@@ -1,0 +1,46 @@
+﻿@model Formula1.Models.Team
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center">Create</h1>
+
+<h4 class="text-center">Team</h4>
+<hr />
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FoundedIn" class="control-label"></label>
+                <input asp-for="FoundedIn" class="form-control" />
+                <span asp-validation-for="FoundedIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChampionshipsWon" class="control-label"></label>
+                <input asp-for="ChampionshipsWon" class="form-control" />
+                <span asp-validation-for="ChampionshipsWon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CheckPaid" /> @Html.DisplayNameFor(model => model.CheckPaid)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
